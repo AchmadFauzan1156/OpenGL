@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iostream>
 #include "ShaderManager.h"
+#include "stb_image.h"
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
@@ -76,7 +77,7 @@ int main()
         1, 2, 3,   // Segitiga 2
     };
 
-    GLuint VAO, VBO, EBO;
+    GLuint VAO, VBO, EBO, texture;
 
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
@@ -84,28 +85,57 @@ int main()
 	glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float)*6, (GLvoid*)0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float)*6, (GLvoid*)(3*sizeof(float)));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(3*sizeof(float)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(6*sizeof(float)));
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
 
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D,texture);
+    //texture warping
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,GL_REPEAT);
+    //texture filtering
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
+    glBindTexture(GL_TEXTURE_2D, texture);
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 
+    int width, heights, nrChannels;
+    stbi_set_flip_vertically_on_load(true);
+    std::string fileTex = "resources/basecolor.png";
+    unsigned char* data = stbi_load(fileTex.c_str(), &width, &heights, &nrChannels, 0);
+    if (data)
+    {
+    GLenum format = (nrChannels == 4) ? GL_RGBA : GL_RGB;
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glTexImage2D(GL_TEXTURE_2D, 0, format, width, heights, 0, format,
+    GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
+    std::cout << "Failed to load texture" << std::endl;
+    }
+    stbi_image_free(data);
+
     while (!glfwWindowShouldClose(window))
     {
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(shaderProgram);
         float timeValue = glfwGetTime();
-        float colorValue = sin(timeValue) * 0.5f + 0.5f;
+        float colorValue = sin(timeValue * 4.0f) * 0.5f + 0.5f;
         int vertexColorLocation = glGetUniformLocation(shaderProgram, "colorUniform");
-        glUniform4f(vertexColorLocation, 1.0f, colorValue, 1.0f, 1.0f);
+        glUniform4f(vertexColorLocation, colorValue, colorValue, colorValue, 1.0f);
         glBindVertexArray(VAO);
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

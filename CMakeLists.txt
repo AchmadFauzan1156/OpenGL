@@ -54,6 +54,7 @@ glad_add_library(
 add_executable(OpenGLProject
     src/main.cpp
     src/ShaderManager.cpp
+    src/stb_image.cpp
 )
 
 # ============================================================
