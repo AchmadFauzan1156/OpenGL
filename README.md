@@ -1,6 +1,6 @@
-# Template Proyek OpenGL
+# OpenGL Project Template
 
-Template sederhana C++ OpenGL yang menggunakan:
+Template C++ OpenGL sederhana yang menggunakan:
 
 * C++17
 * CMake
@@ -9,9 +9,9 @@ Template sederhana C++ OpenGL yang menggunakan:
 * OpenGL 4.6 Core
 * MSVC
 
-## Kebutuhan
+## Requirements
 
-Pasang dulu tool berikut:
+Install dulu tool berikut:
 
 1. **Visual Studio** dengan workload "Desktop development with C++" (MSVC)
 2. **CMake** versi 3.25 atau lebih baru
@@ -19,13 +19,13 @@ Pasang dulu tool berikut:
 4. **Python** 3
 5. **Make** (untuk menjalankan perintah `make` di bawah)
 
-GLFW dan GLAD diunduh otomatis oleh CMake. `stb_image` sudah tersedia di folder `include/`.
+GLFW dan GLAD di-download otomatis oleh CMake. `stb_image` sudah tersedia di folder `include/`.
 
-### Kebutuhan Python
+### Python Requirements
 
-GLAD 2 membuat loader OpenGL saat proses build menggunakan Python, jadi paket Python yang tercantum di `requirement.txt` harus dipasang sebelum menjalankan `make init`.
+GLAD 2 membuat loader OpenGL saat proses build menggunakan Python, jadi package Python yang ada di `requirement.txt` harus di-install sebelum menjalankan `make init`.
 
-Pasang dengan:
+Install dengan:
 
 ```bash
 python -m pip install -r requirement.txt
@@ -43,7 +43,7 @@ Kalau memakai virtual environment, pastikan tetap aktif saat menjalankan `make i
 
 ## Setup
 
-Clone proyek lalu pasang kebutuhan Python:
+Clone project lalu install Python requirements:
 
 ```bash
 git clone https://github.com/AchmadFauzan1156/OpenGL.git
@@ -51,15 +51,15 @@ cd OpenGL
 python -m pip install -r requirement.txt
 ```
 
-Kemudian konfigurasi proyek:
+Kemudian konfigurasi project:
 
 ```bash
 make init
 ```
 
-Perintah ini mengonfigurasi CMake serta mengunduh GLFW dan GLAD secara otomatis.
+Perintah ini mengonfigurasi CMake serta men-download GLFW dan GLAD secara otomatis.
 
-## Build & Jalankan
+## Build & Run
 
 Build:
 
@@ -67,19 +67,19 @@ Build:
 make build
 ```
 
-Jalankan:
+Run:
 
 ```bash
 make run
 ```
 
-Build dan jalankan sekaligus:
+Build dan run sekaligus:
 
 ```bash
 make mlaku
 ```
 
-Atau build ulang dari awal:
+Atau rebuild dari awal:
 
 ```bash
 make rebuild
@@ -91,18 +91,18 @@ Bersihkan hasil build:
 make clean
 ```
 
-## Perintah Make
+## Make Commands
 
-| Perintah       | Keterangan                    |
+| Command        | Keterangan                    |
 | -------------- | ----------------------------- |
 | `make init`    | Inisialisasi CMake            |
-| `make build`   | Build proyek                  |
-| `make rebuild` | Bersihkan lalu build ulang    |
+| `make build`   | Build project                 |
+| `make rebuild` | Clean lalu build ulang        |
 | `make run`     | Jalankan aplikasi             |
 | `make mlaku`   | Build lalu jalankan           |
 | `make clean`   | Bersihkan hasil build         |
 
-## Struktur Proyek
+## Project Structure
 
 ```text
 OpenGLProject/
@@ -127,4 +127,4 @@ OpenGLProject/
 
 Folder `build/` dibuat otomatis oleh CMake.
 
-Jalankan aplikasi dari root proyek (seperti yang dilakukan `make run`), karena tekstur dimuat dari path relatif `resources/basecolor.png`.
+Jalankan aplikasi dari root project (seperti yang dilakukan `make run`), karena texture dimuat dari path relatif `resources/basecolor.png`.
