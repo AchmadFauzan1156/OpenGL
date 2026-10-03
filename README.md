@@ -1,6 +1,6 @@
-# OpenGL Project Template
+# Template Proyek OpenGL
 
-Simple C++ OpenGL template using:
+Template sederhana C++ OpenGL yang menggunakan:
 
 * C++17
 * CMake
@@ -9,29 +9,29 @@ Simple C++ OpenGL template using:
 * OpenGL 4.6 Core
 * MSVC
 
-## Requirements
+## Kebutuhan
 
-Install these tools first:
+Pasang dulu tool berikut:
 
-1. **Visual Studio** with the "Desktop development with C++" workload (MSVC)
-2. **CMake** 3.25 or newer
+1. **Visual Studio** dengan workload "Desktop development with C++" (MSVC)
+2. **CMake** versi 3.25 atau lebih baru
 3. **Git**
 4. **Python** 3
-5. **Make** (to use the `make` commands below)
+5. **Make** (untuk menjalankan perintah `make` di bawah)
 
-GLFW and GLAD are downloaded automatically by CMake. `stb_image` is already included in `include/`.
+GLFW dan GLAD diunduh otomatis oleh CMake. `stb_image` sudah tersedia di folder `include/`.
 
-### Python requirements
+### Kebutuhan Python
 
-GLAD 2 generates the OpenGL loader at build time using Python, so the Python packages listed in `requirement.txt` must be installed before running `make init`.
+GLAD 2 membuat loader OpenGL saat proses build menggunakan Python, jadi paket Python yang tercantum di `requirement.txt` harus dipasang sebelum menjalankan `make init`.
 
-Install them with:
+Pasang dengan:
 
 ```bash
 python -m pip install -r requirement.txt
 ```
 
-Or, to keep them in a virtual environment:
+Atau, kalau ingin memakai virtual environment:
 
 ```bash
 python -m venv .venv
@@ -39,11 +39,11 @@ python -m venv .venv
 python -m pip install -r requirement.txt
 ```
 
-If you use a virtual environment, keep it activated when running `make init`.
+Kalau memakai virtual environment, pastikan tetap aktif saat menjalankan `make init`.
 
 ## Setup
 
-Clone the project and install the Python requirements:
+Clone proyek lalu pasang kebutuhan Python:
 
 ```bash
 git clone https://github.com/AchmadFauzan1156/OpenGL.git
@@ -51,15 +51,15 @@ cd OpenGL
 python -m pip install -r requirement.txt
 ```
 
-Then configure the project:
+Kemudian konfigurasi proyek:
 
 ```bash
 make init
 ```
 
-This will configure CMake and download GLFW and GLAD automatically.
+Perintah ini mengonfigurasi CMake serta mengunduh GLFW dan GLAD secara otomatis.
 
-## Build & Run
+## Build & Jalankan
 
 Build:
 
@@ -67,42 +67,42 @@ Build:
 make build
 ```
 
-Run:
+Jalankan:
 
 ```bash
 make run
 ```
 
-Build and run in one step:
+Build dan jalankan sekaligus:
 
 ```bash
 make mlaku
 ```
 
-Or rebuild from scratch:
+Atau build ulang dari awal:
 
 ```bash
 make rebuild
 ```
 
-Clean build files:
+Bersihkan hasil build:
 
 ```bash
 make clean
 ```
 
-## Make Commands
+## Perintah Make
 
-| Command        | Description       |
-| -------------- | ----------------- |
-| `make init`    | Initialize CMake  |
-| `make build`   | Build project     |
-| `make rebuild` | Clean and rebuild |
-| `make run`     | Run application   |
-| `make mlaku`   | Build and run     |
-| `make clean`   | Clean build       |
+| Perintah       | Keterangan                    |
+| -------------- | ----------------------------- |
+| `make init`    | Inisialisasi CMake            |
+| `make build`   | Build proyek                  |
+| `make rebuild` | Bersihkan lalu build ulang    |
+| `make run`     | Jalankan aplikasi             |
+| `make mlaku`   | Build lalu jalankan           |
+| `make clean`   | Bersihkan hasil build         |
 
-## Project Structure
+## Struktur Proyek
 
 ```text
 OpenGLProject/
@@ -125,6 +125,6 @@ OpenGLProject/
 └── build/
 ```
 
-`build/` is generated automatically by CMake.
+Folder `build/` dibuat otomatis oleh CMake.
 
-Run the application from the project root (as `make run` does), because the texture is loaded from the relative path `resources/basecolor.png`.
+Jalankan aplikasi dari root proyek (seperti yang dilakukan `make run`), karena tekstur dimuat dari path relatif `resources/basecolor.png`.
